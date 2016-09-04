@@ -6,12 +6,12 @@ import com.webserver.exceptions.InvalidRequestException;
 import com.webserver.handlers.FileHandler;
 import com.webserver.server.Server;
 import com.webserver.utils.ContentType;
+import com.webserver.utils.HtmlErrorMessages;
 import com.webserver.utils.HttpMethod;
 import com.webserver.utils.HttpStatus;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.URLConnection;
 import java.util.Date;
 
 /**
@@ -49,15 +49,33 @@ public class HttpTask implements Runnable, HttpHandler {
         }
         catch(InvalidRequestException ex){
             System.err.println(ex.getMessage());
+            try {
+                sendResponse(createErrorResponse("HTTP/1.1", HttpStatus.BAD_REQUEST, HtmlErrorMessages.BAD_REQUEST), client.getOutputStream());
+            }
+            catch(IOException e){
+
+            }
         }
         catch(InvalidProtocolException ex){
             System.err.println(ex.getMessage());
+            try {
+                sendResponse(createErrorResponse("HTTP/1.0", HttpStatus.BAD_REQUEST, HtmlErrorMessages.BAD_REQUEST), client.getOutputStream());
+            }
+            catch(IOException e){
+
+            }
         }
         catch(IOException ex){
             ex.printStackTrace();
         }
         catch(HttpHeaderFormatException ex){
             System.err.println(ex.getMessage());
+            try {
+                sendResponse(createErrorResponse("HTTP/1.1", HttpStatus.BAD_REQUEST, HtmlErrorMessages.BAD_REQUEST), client.getOutputStream());
+            }
+            catch(IOException e){
+
+            }
         }
 
     }
@@ -80,46 +98,46 @@ public class HttpTask implements Runnable, HttpHandler {
         /**
         * Basic checks for HTTP request (e.g: GET /index.html HTTP/1.1)
         * */
-        String requestLine = reader.readLine();
-        if(requestLine == null){
-            throw new InvalidRequestException("Not a valid HTTP request.");
-        }
-        String[] values = requestLine.split(" ");
-        if(values.length != 3){
-            throw new InvalidRequestException("Invalid request.");
-        }
-        if(!values[2].startsWith("HTTP/")){
-            throw new InvalidProtocolException("Server accepts HTTP requests only.");
-        }
-        request.setMethodType(HttpMethod.valueOf(values[0]));
-        request.setRequestURI(values[1]);
-        request.setProtocol(values[2]);
 
-        /**
-        * Parsing HTTP request headers and save it in a key, value collection
-        */
-        requestLine = reader.readLine();
-        while(requestLine != null && !requestLine.equals("")){
-            String[] header = requestLine.split(": ");
-            if(header.length != 2){
-                throw new HttpHeaderFormatException("Invalid HTTP header: " + requestLine);
+            String requestLine = reader.readLine();
+
+            if (requestLine == null) {
+                throw new InvalidRequestException("Not a valid HTTP request.");
             }
-            else
-            {
-                request.getRequestHeaders().put(header[0], header[1]);
+            String[] values = requestLine.split(" ");
+            if (values.length != 3) {
+                throw new InvalidRequestException("Invalid request.");
             }
-            requestLine=reader.readLine();
-        }
+            if (!values[2].startsWith("HTTP/")) {
+                throw new InvalidProtocolException("Server accepts HTTP requests only.");
+            }
+            request.setMethodType(HttpMethod.valueOf(values[0]));
+            request.setRequestURI(values[1]);
+            request.setProtocol(values[2]);
+
+            /**
+             * Parsing HTTP request headers and save it in a key, value collection
+             */
+            while (((requestLine = reader.readLine()) != null) && !requestLine.equals("")) {
+                String[] header = requestLine.split(": ");
+                if (header.length != 2) {
+                    throw new HttpHeaderFormatException("Invalid HTTP header: " + requestLine);
+                } else {
+                    request.getRequestHeaders().put(header[0], header[1]);
+                }
+            }
 
 
-        if (request.getHttpMethod().equals("POST")){
 
-        }
+
+     /*   if (request.getHttpMethod().equals("POST")){
+
+        }*/
         return request;
     }
 
     @Override
-    public HttpResponse handleRequest(HttpRequest request) throws IOException {
+    public HttpResponse handleRequest(HttpRequest request) {
         HttpResponse response = new HttpResponse();
         if(request.getHttpMethod().equals(HttpMethod.GET)) {
             return handleGETRequest(request);
@@ -129,29 +147,43 @@ public class HttpTask implements Runnable, HttpHandler {
         }
 
     @Override
-    public HttpResponse handleGETRequest(HttpRequest request) throws IOException {
-        File webApp = new File("webapps" + request.getRequestURI());
+    public HttpResponse handleGETRequest(HttpRequest request){
+        File getFile = new File("webapps" + request.getRequestURI());
+        File rootDir = new File("webapps");
         HttpResponse response = new HttpResponse();
         response.setProtocol(request.getProtocol());
-            if(webApp.exists()) {
-                response.setHttpStatus(HttpStatus.OK);
-                response.setDateHeader(new Date());
-                InputStream fis = new FileInputStream(webApp);
-                response.setContentLengthHeader(fis.available());
-                byte[] body = new byte[fis.available()];
-                fis.read(body);
-                fis.close();
-                response.setResponseBody(body);
-                response.setContentTypeHeader(FileHandler.getContentTypeFromFileExtension(webApp));
+        if(getFile.isDirectory() && getFile.exists()){
+            getFile = new File("webapps" + request.getRequestURI() + "/index.html");
+        }
+        try {
+            if (!getFile.getCanonicalPath().startsWith(rootDir.getCanonicalPath())) {
+                System.out.println(getFile.getCanonicalPath());
+                return createErrorResponse(request.getProtocol(), HttpStatus.FORBIDDEN, HtmlErrorMessages.ACCESS_FORBIDDEN);
             }
-            else
-            {
-                String errorMessage = "<html><body><h1>404 File not found.</h1></body></html>";
-                response.setHttpStatus(HttpStatus.BAD_REQUEST);
-                response.setDateHeader(new Date());
-                response.setContentTypeHeader(ContentType.HTML);
-                response.setContentLengthHeader(errorMessage.length());
-                response.setResponseBody(errorMessage.getBytes());
+        }
+        catch(IOException ex){
+                return createErrorResponse(request.getProtocol(), HttpStatus.INTERNAL_SERVER_ERROR, HtmlErrorMessages.INTERNAL_SERVER_ERROR);
+        }
+            if (getFile.exists()) {
+                try {
+                    response.setHttpStatus(HttpStatus.OK);
+                    response.setDateHeader(new Date());
+                    InputStream fis = new FileInputStream(getFile);
+                    response.setContentLengthHeader(fis.available());
+                    byte[] body = new byte[fis.available()];
+                    fis.read(body);
+                    fis.close();
+                    response.setResponseBody(body);
+                    response.setContentTypeHeader(FileHandler.getContentTypeFromFileExtension(getFile));
+                }
+                catch(FileNotFoundException ex){
+                   return createErrorResponse(request.getProtocol(), HttpStatus.NOT_FOUND, HtmlErrorMessages.FILE_NOT_FOUND);
+                }
+                catch(IOException ex){
+                    return createErrorResponse(request.getProtocol(), HttpStatus.INTERNAL_SERVER_ERROR, HtmlErrorMessages.INTERNAL_SERVER_ERROR);
+                }
+            } else {
+                return createErrorResponse(request.getProtocol(), HttpStatus.NOT_FOUND, HtmlErrorMessages.FILE_NOT_FOUND);
             }
         return response;
     }
@@ -169,6 +201,18 @@ public class HttpTask implements Runnable, HttpHandler {
     @Override
     public HttpResponse handlePUTRequest(HttpRequest request) throws IOException {
         return null;
+    }
+
+    @Override
+    public HttpResponse createErrorResponse(String protocol, HttpStatus statusCode, HtmlErrorMessages messages) {
+        HttpResponse response = new HttpResponse();
+        response.setProtocol(protocol);
+        response.setHttpStatus(statusCode);
+        response.setDateHeader(new Date());
+        response.setContentTypeHeader(ContentType.HTML);
+        response.setContentLengthHeader(messages.getErrorMessage().length());
+        response.setResponseBody(messages.getErrorMessage().getBytes());
+        return response;
     }
 
 

@@ -6,9 +6,7 @@ package com.webserver.utils;
  */
 public enum HttpStatus {
     OK("200 OK"),
-    ACCEPTED("202 Accepted"),
-    CREATED("201 Created"),
-    BAD_GATEWAY("502 Bad Gateway"),
+    INTERNAL_SERVER_ERROR("500 Internal Server Error"),
     BAD_REQUEST("400 Bad Request"),
     FORBIDDEN("403 Forbidden"),
     NOT_FOUND("404 Not Found");
