@@ -8,8 +8,17 @@ Description: Implementation of a thread pooled web server that manages the reque
 
 # How 2 Run
 
-- Set `JAVA_HOME` Environment variable to your java installation folder (e.g. `C:\Program Files\Java\jdk1.8.0_40\`);
-- Add `java bin folder to Path` (e.g. `C:\Program Files\Java\jdk1.8.0_40\bin`)
+	## Windows:
+
+	- Set `JAVA_HOME` Environment variable to your java installation folder (e.g. `C:\Program Files\Java\jdk1.8.0_40\`);
+	- Add `java bin folder to Path` (e.g. `C:\Program Files\Java\jdk1.8.0_40\bin`);
+	- Run from `Command Line` the `startup.bat` located in the project `bin` folder;
+
+	## Linux:
+
+	- Set `JAVA_HOME` Environment variable (`sudo export JAVA_HOME=/usr/lib/jvm/jdk1.8.0`);
+	- Add `java bin folder to Path` (`sudo export PATH=$PATH:$JAVA_HOME/bin`);
+	- Run from `Terminal` the `startup.sh` located in the project `bin` folder;
 
 # Data Flow
 
@@ -50,3 +59,6 @@ Description: Implementation of a thread pooled web server that manages the reque
 
 	+ 'text/html'; `text/plain`; `text/css`; `application/js`; `image/png`; `image/jpg`; `image/jpeg`;
 	+ If the content type of the requested file is not reconized the header will be asigned with the value: `Content-Type: text/html`;
+
+# References:
+
