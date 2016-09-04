@@ -2,6 +2,15 @@
 
 Description: Implementation of a thread pooled web server that manages the requested files.
 
+# Requirements
+
+- Java 8 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html (The implementation contains lambda and streams which are available only in JAVA 8);
+
+# How 2 Run
+
+- Set `JAVA_HOME` Environment variable to your java installation folder (e.g. `C:\Program Files\Java\jdk1.8.0_40\`);
+- Add `java bin folder to Path` (e.g. `C:\Program Files\Java\jdk1.8.0_40\bin`)
+
 # Data Flow
 
 - When the server is started a thread pool is initialized with a specified number of threads that are waiting for an incoming HTTP request;
