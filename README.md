@@ -26,3 +26,18 @@ Description: Implementation of a thread pooled web server that manages the reque
 	+ `InvalidRequestException` is thrown when the InputStream contains `null` data or if the first line of the Request is not valid;
 	+ `InvalidProtocolException` is thrown when the protocol mentioned in the request is not `HTTP`;
 	+ `HttpHeaderFormatException` is thrown when the HTTP Header does not have the following format `Header_Name: Header_Value`;
+
+- Supported HTTP Responses:
+	
+	## HTTP Status Code:
+
+	+ `200 OK`;
+	+ `400 Bad Request`;
+	+ `403 Forbidden`;
+	+ `404 Not Found`;
+	+ `500 Internal Server Error`;
+
+	## Supported Contet Type:
+
+	+ 'text/html'; `text/plain`; `text/css`; `application/js`; `image/png`; `image/jpg`; `image/jpeg`;
+	+ If the content type of the requested file is not reconized the header will be asigned with the value: `Content-Type: text/html`;
