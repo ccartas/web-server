@@ -16,5 +16,5 @@ Description: Implementation of a thread pooled web server that manages the reque
 	
 	ThreadPoolExecutor vs ExecutorService
 
-		+ `ExecutorService` is using `ThreadPoolExecutor` in its `newFixedThreadPool(int numberOfThreads)` method, but it doesn't match the requirements for a HTTP `keep-alive` flag. `ThreadPoolExecutor` constructor provides a `keepAlive` parameter which specifies the time a thread could stay idle after finishing executing the task.
-		+ If all the threads from the the Thread Pool are executing a task, the incoming tasks will be added into a `BlockingQueue`. If the `BlockinQueue` is filled and more tasks are comming the server will throw `RejectedExecutionException`.
+	+ `ExecutorService` is using `ThreadPoolExecutor` in its `newFixedThreadPool(int numberOfThreads)` method, but it doesn't match the requirements for a HTTP `keep-alive` flag. `ThreadPoolExecutor` constructor provides a `keepAlive` parameter which specifies the time a thread could stay idle after finishing executing the task.
+	+ If all the threads from the the Thread Pool are executing a task, the incoming tasks will be added into a `BlockingQueue`. If the `BlockinQueue` is filled and more tasks are comming the server will throw `RejectedExecutionException`.

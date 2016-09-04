@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aeced836-ffff-49d4-a1ef-bffe4f60791c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/ContentTypeResponseTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpHandler.class" afterPath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpRequest.class" afterPath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpTask.class" afterPath="$PROJECT_DIR$/out/production/WebServer/com/webserver/http/HttpTask.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WebServer/com/webserver/server/Server.class" afterPath="$PROJECT_DIR$/out/production/WebServer/com/webserver/server/Server.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/WebServer/com/webserver/utils/HttpStatus.class" afterPath="$PROJECT_DIR$/out/production/WebServer/com/webserver/utils/HttpStatus.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebServer.iml" afterPath="$PROJECT_DIR$/WebServer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webserver/http/HttpHandler.java" afterPath="$PROJECT_DIR$/src/com/webserver/http/HttpHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webserver/http/HttpTask.java" afterPath="$PROJECT_DIR$/src/com/webserver/http/HttpTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webserver/utils/HttpStatus.java" afterPath="$PROJECT_DIR$/src/com/webserver/utils/HttpStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webapps/index.html" afterPath="$PROJECT_DIR$/webapps/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/webserver/Application.java" afterPath="$PROJECT_DIR$/src/com/webserver/Application.java" />
     </list>
     <ignored path="WebServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,8 +70,8 @@
       <file leaf-file-name="ContentTypeResponseTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/ContentTypeResponseTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="99" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="99" />
+            <state relative-caret-position="269">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -100,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResponseStatusTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ResponseStatusTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/ResponseStatusTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="351">
@@ -112,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/webserver/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="221">
+              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -188,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/com/webserver/server/HttpServer.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/server/Server.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/handlers/ServerThreadPoolExecutor.java" />
-        <option value="$PROJECT_DIR$/src/com/webserver/Application.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/http/HttpRequest.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/handlers/RejectedTaskHandler.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/handlers/FileOperations.java" />
@@ -208,6 +196,7 @@
         <option value="$PROJECT_DIR$/src/com/webserver/utils/HtmlErrorMessages.java" />
         <option value="$PROJECT_DIR$/src/test/ResponseStatusTest.java" />
         <option value="$PROJECT_DIR$/src/com/webserver/http/HttpTask.java" />
+        <option value="$PROJECT_DIR$/src/com/webserver/Application.java" />
       </list>
     </option>
   </component>
@@ -339,6 +328,20 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webserver" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -437,7 +440,7 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -953,8 +956,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ResponseStatusTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Application" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Application" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ResponseStatusTest" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.ContentTypeResponseTest" />
         <item index="3" class="java.lang.String" itemvalue="Application.MainTest" />
         <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
@@ -1001,7 +1004,7 @@
       <workItem from="1472910862589" duration="11672000" />
       <workItem from="1472928955180" duration="7776000" />
       <workItem from="1472971619099" duration="1984000" />
-      <workItem from="1472974090131" duration="12823000" />
+      <workItem from="1472974090131" duration="14866000" />
     </task>
     <servers />
   </component>
@@ -1038,7 +1041,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187823000" />
+    <option name="totallyTimeSpent" value="189866000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1437,14 +1440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/webserver/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/webserver/MainTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1482,16 +1477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/ContentTypeResponseTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="99" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="99" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/ResponseStatusTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
@@ -1502,17 +1487,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/ContentTypeResponseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/webserver/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>unnamed</last-edited>
+          <last-edited>WebServer:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

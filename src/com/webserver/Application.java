@@ -14,6 +14,8 @@ public class Application {
 
     public static void main(String[] args){
         try {
+            File f = new File("");
+            System.out.println(f.getAbsolutePath());
             Server server = new Server(Settings.listeningPort,
                     Settings.initialNoThreads,
                     Settings.maxNoThreads);
