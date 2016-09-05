@@ -20,6 +20,8 @@ Description: Implementation of a thread pooled web server that manages the reque
 	+ Add `java bin folder to Path` (`sudo export PATH=$PATH:$JAVA_HOME/bin`);
 	+ Run from `Terminal` the `startup.sh` located in the project root folder;
 
+- Put your files in the `webapps` folder and start sending requests;
+
 # Data Flow
 
 - When the server is started a thread pool is initialized with a specified number of threads that are waiting for an incoming HTTP request;
