@@ -3,7 +3,7 @@ package com.webserver.http;
 import com.webserver.exceptions.HttpHeaderFormatException;
 import com.webserver.exceptions.InvalidProtocolException;
 import com.webserver.exceptions.InvalidRequestException;
-import com.webserver.utils.HtmlErrorMessages;
+import com.webserver.utils.HtmlMessages;
 import com.webserver.utils.HttpStatus;
 
 import java.io.IOException;
@@ -22,10 +22,10 @@ public interface HttpHandler {
     public HttpRequest processHttpRequest(InputStream input) throws InvalidRequestException, InvalidProtocolException, IOException, HttpHeaderFormatException;
     public HttpResponse handleRequest(HttpRequest request);
     public HttpResponse handleGETRequest(HttpRequest request);
-    public HttpResponse handlePOSTRequest(HttpRequest request) throws IOException;
-    public HttpResponse handleDELETERequest(HttpRequest request) throws IOException;
-    public HttpResponse handlePUTRequest(HttpRequest request) throws IOException;
-    public HttpResponse createErrorResponse(String protocol, HttpStatus statusCode, HtmlErrorMessages messages);
+    public HttpResponse handlePOSTRequest(HttpRequest request);
+    public HttpResponse handleDELETERequest(HttpRequest request);
+    public HttpResponse handlePUTRequest(HttpRequest request);
+    public HttpResponse createSimpleResponse(String protocol, HttpStatus statusCode, HtmlMessages messages);
     public void sendResponse(HttpResponse response, OutputStream output) throws IOException;
     public boolean checkKeepAlive(HttpRequest request, HttpResponse response);
 }

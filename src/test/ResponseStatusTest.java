@@ -12,6 +12,10 @@ import java.net.Socket;
 /**
  * Created by Cosmin on 9/4/2016.
  */
+
+/**
+ * Unit Test class that test the available HTTP Status Codes
+ */
 public class ResponseStatusTest {
 
     public void setUp(){
@@ -40,7 +44,6 @@ public class ResponseStatusTest {
             String line="";
             if((line=reader.readLine())!=null && !line.equals("")){
                 statusCode = Integer.valueOf(line.split(" ")[1]);
-                System.out.println("Stats Code for requesting "+URI+": "+statusCode);
             }
             s.close();
 
@@ -74,7 +77,6 @@ public class ResponseStatusTest {
             String line="";
             if((line=reader.readLine())!=null && !line.equals("")){
                 statusCode = Integer.valueOf(line.split(" ")[1]);
-                System.out.println("Stats Code for requesting "+URI+": "+statusCode);
             }
             s.close();
 
@@ -108,7 +110,6 @@ public class ResponseStatusTest {
             String line="";
             if((line=reader.readLine())!=null && !line.equals("")){
                 statusCode = Integer.valueOf(line.split(" ")[1]);
-                System.out.println("Stats Code for requesting "+URI+": "+statusCode);
             }
             s.close();
 
@@ -142,7 +143,6 @@ public class ResponseStatusTest {
             String line="";
             if((line=reader.readLine())!=null && !line.equals("")){
                 statusCode = Integer.valueOf(line.split(" ")[1]);
-                System.out.println("Stats Code for requesting "+URI+": "+statusCode);
             }
             s.close();
 
@@ -156,7 +156,7 @@ public class ResponseStatusTest {
 
     @Test
     public void testOKResponse(){
-        Assert.assertEquals("GET Existing File", 200, sendRequest("localhost",8080,"/main.css"));
+        Assert.assertEquals("GET Existing File", 200, sendRequest("localhost",8080,"/test/main.css"));
     }
     @Test
     public void testForbiddenResponse(){
@@ -168,14 +168,14 @@ public class ResponseStatusTest {
     }
     @Test
     public void testInvalidRequestException(){
-        Assert.assertEquals("Invalid Request Exception ",400, sendInvalidRequestException("localhost",8080,"/main.css"));
+        Assert.assertEquals("Invalid Request Exception ",400, sendInvalidRequestException("localhost",8080,"/test/main.css"));
     }
     @Test
     public void testInvalidProtocolException(){
-        Assert.assertEquals("Invalid Protocol Exception ",400, sendInvalidProtocolException("localhost",8080,"/but2.png"));
+        Assert.assertEquals("Invalid Protocol Exception ",400, sendInvalidProtocolException("localhost",8080,"/test/but2.png"));
     }
     @Test
     public void testHttpHeaderFormatException(){
-        Assert.assertEquals("Invalid HTTP Header Exception ",400, sendHttpHeaderFormatException("localhost",8080,"/test.js"));
+        Assert.assertEquals("Invalid HTTP Header Exception ",400, sendHttpHeaderFormatException("localhost",8080,"/test/test.js"));
     }
 }

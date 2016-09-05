@@ -4,6 +4,9 @@ package com.webserver.utils;
  * Created by Cosmin on 8/29/2016.
  */
 
+/**
+ * Enum that contains constants representing HTTP Headers
+ */
 public enum HttpHeaders {
 
     HOST("Host"),

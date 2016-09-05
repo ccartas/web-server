@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 /**
  * Created by Cosmin on 8/25/2016.
  */
+
+/**
+ * HttpResponse class is used to map the HTTP response that is sent to the client;
+ * Fileds:
+ * protocol - mapping the HTTP protocol used;
+ * httpStatus - mapping the Status Code returned to the client;
+ * headers - mapping the HTTP response headers;
+ * responseBody - mapping the HTTP response body that is sent to the client;
+ */
 public class HttpResponse {
 
     private String protocol;

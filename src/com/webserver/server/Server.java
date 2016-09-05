@@ -4,6 +4,7 @@ import com.sun.corba.se.spi.orbutil.threadpool.ThreadPool;
 import com.webserver.handlers.RejectedTaskHandler;
 import com.webserver.handlers.ServerThreadPoolExecutor;
 import com.webserver.http.HttpTask;
+import com.webserver.utils.Settings;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class  Server implements HttpServer {
     @Override
     public void start(){
         running = true;
+        System.out.println("Server started on the port: "+ Settings.listeningPort);
         this.mainThread.execute(()->{
             while(running){
                try{
@@ -49,7 +51,7 @@ public class  Server implements HttpServer {
                    submitRequest(socket);
                }
                catch(SocketException ex){
-
+                   ex.printStackTrace();
                }
                catch(IOException ex){
                    ex.printStackTrace();

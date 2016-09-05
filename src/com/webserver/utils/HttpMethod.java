@@ -8,8 +8,7 @@ public enum HttpMethod {
     GET("GET"),
     POST("POST"),
     PUT("PUT"),
-    DELETE("DELETE"),
-    UNRECOGNIZED(null);
+    DELETE("DELETE");
 
     private String method;
 

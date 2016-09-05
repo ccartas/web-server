@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  */
 
 /**
- * HttpRequest is used to map the HTTP requests coming from the client's browser;
+ * HttpRequest class is used to map the HTTP requests coming from the client's browser;
  * Used fields:
  * methodType - mapping the type of HTTP method that is performed
  * requestURI - mapping the HTTP request path

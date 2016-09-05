@@ -12,13 +12,13 @@ Description: Implementation of a thread pooled web server that manages the reque
 
 	+ Set `JAVA_HOME` Environment variable to your java installation folder (e.g. `C:\Program Files\Java\jdk1.8.0_40\`);
 	+ Add `java bin folder to Path` (e.g. `C:\Program Files\Java\jdk1.8.0_40\bin`);
-	+ Run from `Command Line` the `startup.bat` located in the project `bin` folder;
+	+ Run from `Command Line` the `startup.bat` located in the project root folder;
 
 - Linux:
 
 	+ Set `JAVA_HOME` Environment variable (`sudo export JAVA_HOME=/usr/lib/jvm/jdk1.8.0`);
 	+ Add `java bin folder to Path` (`sudo export PATH=$PATH:$JAVA_HOME/bin`);
-	+ Run from `Terminal` the `startup.sh` located in the project `bin` folder;
+	+ Run from `Terminal` the `startup.sh` located in the project root folder;
 
 # Data Flow
 
@@ -46,6 +46,13 @@ Description: Implementation of a thread pooled web server that manages the reque
 	+ `HttpHeaderFormatException` is thrown when the HTTP Header does not have the following format `Header_Name: Header_Value`;
 
 - Supported HTTP Responses:
+
+	## Supported HTTP Methods:
+
+	+ `GET`: You can get any type of file that is located in the `webapps` folder;
+	+ `PUT`: Creates a file specified in the `Request URI`. If the file already exists, the server will send `FORBIDDEN` status code.
+	+ `DELETE`: Deletes a file specified in the `Request URI`. If the file cannot be deleted the server will send `FORBIDDEN` status code.
+	+ `POST`: Not implemented. (Couldn't think at a valid use case. Create a file from the request body parametter???)
 	
 	## HTTP Status Code:
 
@@ -61,4 +68,14 @@ Description: Implementation of a thread pooled web server that manages the reque
 	+ If the content type of the requested file is not reconized the header will be asigned with the value: `Content-Type: text/html`;
 
 # References:
+
+- Git repository: https://github.com/ibogomolov/WebServer
+- How `keep-alive` works: http://stackoverflow.com/questions/20763999/how-does-http-keep-alive-work;
+- How `ThreadPoolExecutor` works: https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ThreadPoolExecutor.html;
+- When `RejectedExecutionException` is thrown: http://stackoverflow.com/questions/4172674/rejectedexecutionexception-in-java-threads;
+- http://www.javaworld.com/article/2853780/java-app-dev/socket-programming-for-scalable-systems.html
+
+# Other approach:
+
+- Non Blocking Input-Output mechanism (NodeJS like);
 

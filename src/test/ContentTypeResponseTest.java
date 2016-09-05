@@ -11,6 +11,10 @@ import java.net.Socket;
 /**
  * Created by Cosmin on 9/3/2016.
  */
+
+/**
+ * Unit Test Class used to test the returned Content-Type header from the HTTP Response
+ */
 public class ContentTypeResponseTest {
 
     public void setUp(){
@@ -41,7 +45,6 @@ public class ContentTypeResponseTest {
             while((line=reader.readLine())!=null && !line.equals("")){
                 if(line.startsWith("Content-Type")){
                     contentType = line.split(": ")[1];
-                    System.out.println("Content Type for requested file "+ URI + ": "+contentType);
                     return contentType;
                 }
             }
@@ -57,26 +60,26 @@ public class ContentTypeResponseTest {
 
     @Test
     public void testGetCssFile(){
-        Assert.assertEquals("GET CSS File", "text/css", sendRequest("localhost",8080,"/main.css"));
+        Assert.assertEquals("GET CSS File", "text/css", sendRequest("localhost",8080,"/test/main.css"));
     }
     @Test
     public void testGetHTMLFile(){
-        Assert.assertEquals("GET HTML File", "text/html", sendRequest("localhost",8080,"/index.html"));
+        Assert.assertEquals("GET HTML File", "text/html", sendRequest("localhost",8080,"/test/index.html"));
     }
     @Test
     public void testGetJSFile(){
-        Assert.assertEquals("GET JS File", "application/js",sendRequest("localhost",8080,"/test.js"));
+        Assert.assertEquals("GET JS File", "application/js",sendRequest("localhost",8080,"/test/test.js"));
     }
     @Test
     public void testGetJPGFile(){
-        Assert.assertEquals("GET JPG File", "image/jpg",sendRequest("localhost",8080,"/test1.jpg"));
+        Assert.assertEquals("GET JPG File", "image/jpg",sendRequest("localhost",8080,"/test/test1.jpg"));
     }
     @Test
     public void testGetPNGFile(){
-        Assert.assertEquals("GET PNG File", "image/png", sendRequest("localhost",8080,"/but2.png"));
+        Assert.assertEquals("GET PNG File", "image/png", sendRequest("localhost",8080,"/test/but2.png"));
     }
     @Test
     public void testUnknownFile(){
-        Assert.assertEquals("GET Unknown File Type", "text/html", sendRequest("localhost",8080,"/file.unk"));
+        Assert.assertEquals("GET Unknown File Type", "text/html", sendRequest("localhost",8080,"/test/file.unk"));
     }
 }
