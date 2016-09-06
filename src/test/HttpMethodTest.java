@@ -68,4 +68,5 @@ public class HttpMethodTest {
     public void testDELETERequest(){
         Assert.assertEquals("Test DELETE Request",200, sendHttpRequest("localhost",8080,HttpMethod.DELETE,"/test/unittest.txt"));
     }
+
 }

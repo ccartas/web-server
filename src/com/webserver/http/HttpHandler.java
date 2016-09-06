@@ -19,9 +19,10 @@ import java.io.OutputStream;
  * */
 public interface HttpHandler {
 
-    public HttpRequest processHttpRequest(InputStream input) throws InvalidRequestException, InvalidProtocolException, IOException, HttpHeaderFormatException;
+    public HttpRequest processHttpRequest(InputStream input) throws InvalidRequestException, InvalidProtocolException, IOException, HttpHeaderFormatException, IllegalArgumentException;
     public HttpResponse handleRequest(HttpRequest request);
     public HttpResponse handleGETRequest(HttpRequest request);
+    public HttpResponse handleHEADRequest(HttpRequest request);
     public HttpResponse handlePOSTRequest(HttpRequest request);
     public HttpResponse handleDELETERequest(HttpRequest request);
     public HttpResponse handlePUTRequest(HttpRequest request);

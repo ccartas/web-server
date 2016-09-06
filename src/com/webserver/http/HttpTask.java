@@ -65,6 +65,14 @@ public class HttpTask implements Runnable, HttpHandler {
 
             }
         }
+        catch(IllegalArgumentException ex){
+            try {
+                sendResponse(createSimpleResponse("HTTP/1.1", HttpStatus.BAD_REQUEST, HtmlMessages.BAD_REQUEST), client.getOutputStream());
+            }
+            catch(IOException e){
+
+            }
+        }
         catch(IOException ex){
             ex.printStackTrace();
         }
@@ -91,7 +99,7 @@ public class HttpTask implements Runnable, HttpHandler {
      * @throws HttpHeaderFormatException - Exception Thrown if the HTTP Request Header has other format than (Header_Name: Header_Value);
      */
     @Override
-    public HttpRequest processHttpRequest(InputStream input) throws InvalidRequestException, InvalidProtocolException, IOException, HttpHeaderFormatException {
+    public HttpRequest processHttpRequest(InputStream input) throws InvalidRequestException, InvalidProtocolException, IOException, HttpHeaderFormatException, IllegalArgumentException {
         HttpRequest request = new HttpRequest();
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
@@ -157,13 +165,21 @@ public class HttpTask implements Runnable, HttpHandler {
      */
     @Override
     public HttpResponse handleRequest(HttpRequest request) {
-        if(request.getHttpMethod().equals(HttpMethod.GET)) {
-            return handleGETRequest(request);
+        try {
+            if (request.getHttpMethod().equals(HttpMethod.GET)) {
+                return handleGETRequest(request);
+            } else if (request.getHttpMethod().equals(HttpMethod.HEAD)) {
+                return handleHEADRequest(request);
+            } else if (request.getHttpMethod().equals(HttpMethod.PUT)) {
+                return handlePUTRequest(request);
+            } else if (request.getHttpMethod().equals(HttpMethod.DELETE)) {
+                return handleDELETERequest(request);
+            }
         }
-        else if(request.getHttpMethod().equals(HttpMethod.PUT)){
-            return handlePUTRequest(request);
-        }else if(request.getHttpMethod().equals(HttpMethod.DELETE)){
-            return handleDELETERequest(request);
+        catch(IllegalArgumentException ex){
+            ex.printStackTrace();
+            return createSimpleResponse("HTTP/1.1", HttpStatus.BAD_REQUEST, HtmlMessages.BAD_REQUEST);
+
         }
         return createSimpleResponse("HTTP/1.1", HttpStatus.BAD_REQUEST, HtmlMessages.BAD_REQUEST);
         }
@@ -204,6 +220,46 @@ public class HttpTask implements Runnable, HttpHandler {
             } else {
                 return createSimpleResponse(request.getProtocol(), HttpStatus.NOT_FOUND, HtmlMessages.FILE_NOT_FOUND);
             }
+        return response;
+    }
+
+    @Override
+    public HttpResponse handleHEADRequest(HttpRequest request) {
+        File headFile = new File("webapps" + request.getRequestURI());
+        HttpResponse response = new HttpResponse();
+        response.setProtocol(request.getProtocol());
+
+        HttpResponse badResponse = checkForAbsolutePathTraversal(request, headFile);
+        if (badResponse != null) {
+            badResponse.setResponseBody(null);
+            return badResponse;
+        }
+        if (headFile.exists()) {
+            try {
+                response.setHttpStatus(HttpStatus.OK);
+                response.setDateHeader(new Date());
+
+                InputStream fis = new FileInputStream(headFile);
+                response.setContentLengthHeader(fis.available());
+                byte[] body = new byte[fis.available()];
+                fis.read(body);
+                fis.close();
+                response.setResponseBody(null);
+                response.setContentTypeHeader(FileHandler.getContentTypeFromFileExtension(headFile));
+            } catch (FileNotFoundException ex) {
+                response = createSimpleResponse(request.getProtocol(), HttpStatus.NOT_FOUND, HtmlMessages.FILE_NOT_FOUND);
+                response.setResponseBody(null);
+                return response;
+            } catch (IOException ex) {
+                response = createSimpleResponse(request.getProtocol(), HttpStatus.INTERNAL_SERVER_ERROR, HtmlMessages.INTERNAL_SERVER_ERROR);
+                response.setResponseBody(null);
+                return response;
+            }
+        } else {
+            response = createSimpleResponse(request.getProtocol(), HttpStatus.NOT_FOUND, HtmlMessages.FILE_NOT_FOUND);
+            response.setResponseBody(null);
+            return  response;
+        }
         return response;
     }
 
@@ -289,6 +345,7 @@ public class HttpTask implements Runnable, HttpHandler {
         response.setProtocol(protocol);
         response.setHttpStatus(statusCode);
         response.setDateHeader(new Date());
+        response.getResponseHeaders().put("Connection","close");
         response.setContentTypeHeader(ContentType.HTML);
         response.setContentLengthHeader(messages.getErrorMessage().length());
         response.setResponseBody(messages.getErrorMessage().getBytes());
